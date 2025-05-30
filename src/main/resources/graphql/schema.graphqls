@@ -1,0 +1,45 @@
+type Query {
+    allBooks: [BookDto!]!
+    booksByGenre(bookGenre: BookGenreEnum!): [BookCredentialsDto!]!
+    booksByGenreAndPages(bookGenre: BookGenreEnum!, min: Int!, max: Int!): [BookCredentialsDto!]!
+    booksByGenreAndPagesAsc(bookGenre: BookGenreEnum!, min: Int!, max: Int!): [BookCredentialsDto!]!
+    reservedBooks: [BookReservedDto!]!
+    freeBooks: [BookDto!]!
+}
+
+type Mutation {
+    reserveBook(title: String!): Int!
+    freeBook(title: String!): Int!
+}
+
+type BookDto {
+    title: String
+    authorSurname: String
+    authorName: String
+    bookGenre: BookGenreEnum
+}
+
+type BookCredentialsDto {
+    id: Int
+    title: String
+    authorSurname: String
+    authorName: String
+    bookGenre: BookGenreEnum
+    pagesAmount: Int
+}
+
+type BookReservedDto {
+    title: String
+    authorSurname: String
+    authorName: String
+    bookGenre: BookGenreEnum
+    reservedDate: String
+}
+
+enum BookGenreEnum {
+    Fantasy
+    Horror
+    Drama
+    Comedy
+    NonFiction
+}
