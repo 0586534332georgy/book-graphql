@@ -1,25 +1,24 @@
 package book.graph.resolver;
 
-import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Component;
 
 import book.graph.service.BookService;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class BookMutationResolver {
+public class BookMutationResolver implements GraphQLMutationResolver {
 
     private final BookService bookService;
 
-    @MutationMapping
-    public int reserveBook(@Argument String title) {
+    
+    public int reserveBook(String title) {
         return bookService.setBookReserved(title);
     }
 
-    @MutationMapping
-    public int freeBook(@Argument String title) {
+    
+    public int freeBook(String title) {
         return bookService.setBookFree(title);
     }
 }
